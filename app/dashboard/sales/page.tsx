@@ -46,14 +46,16 @@ const page = () => {
             });
             
             console.log("API response:", res.data);
-            setSales(res.data.data);
+            setSales(res.data);
           } catch (error) {
             console.error(error);
+            setSales([]);
           }
         };
         fetchData();
-    }, []);
-
+    },[]);
+    
+    // Filter first
     const filteredSales = sales.filter(order => {
       const statusMatch = statusFilter ? order.paymentStatus === statusFilter : true;
       const customerMatch = customerFilter
@@ -61,14 +63,16 @@ const page = () => {
         : true;
       return statusMatch && customerMatch;
     });
-    const sortSales = sales.sort((a, b) => {
-        if (sortFilter === "new") {
-            return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-        } else if (sortFilter === "old") {
-            return new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
-        } else {
-            return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-        }
+
+    // Then sort (make a copy to avoid mutating state)
+    const sortedSales = [...filteredSales].sort((a, b) => {
+      if (sortFilter === "new") {
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+      } else if (sortFilter === "old") {
+        return new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
+      } else {
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+      }
     });
 
 
@@ -117,8 +121,8 @@ const page = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredSales && filteredSales.length > 0 ? (
-                filteredSales.map((order) => (
+              {sortedSales && sortedSales.length > 0 ? (
+                sortedSales.map((order) => (
                   <tr
                     key={order._id}
                     className="border-b-2 border-[#2A2A2A] hover:bg-[#FFD6BA] transition-colors"
