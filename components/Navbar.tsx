@@ -85,7 +85,11 @@ const Navbar = () => {
                                                 Profile
                                             </Link>
                                             <button 
-                                                onClick={() => {
+                                                onClick={async() => {
+                                                    await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/logout`, {
+                                                        method: 'POST', // or 'GET', depending on your backend
+                                                        credentials: 'include',
+                                                    });
                                                     dispatch(logout());
                                                     setIsDropdownOpen(false);
                                                     router.push('/login');
