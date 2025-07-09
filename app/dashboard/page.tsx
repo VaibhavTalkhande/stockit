@@ -179,7 +179,7 @@ const DashboardPage = () => {
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                         <div>
                             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#2A2A2A] mb-2">
-                                {user.storeName}
+                                {user.store.name}
                             </h1>
                             <p className="text-lg sm:text-xl text-[#2A2A2A] opacity-80">
                                 Welcome back, {user.username}! 👋

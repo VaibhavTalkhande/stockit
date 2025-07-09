@@ -78,7 +78,7 @@ const SideNavbar = () => {
                             {isClient && user?.username}
                         </p>
                         <p className="text-sm text-[#2A2A2A]">
-                            {isClient && user?.storeName}
+                            {isClient && user?.store?.name}
                         </p>
                     </div>
                 </div>

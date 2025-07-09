@@ -4,7 +4,10 @@ export interface User {
     _id: string;
     username: string;
     email: string;
-    storeName: string;
+    store: {
+        _id: string;
+        name: string;
+    }
 }
 
 interface AuthState {
