@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials, logout } from "../store/slices/authSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RootState } from "../store/index";
 
 const useAuth = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state: RootState) => state.auth);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUserSession = async () => {
@@ -21,18 +22,20 @@ const useAuth = () => {
                     dispatch(logout());
                 }
             } catch (error) {
-                console.error("Error fetching user session:", error);
                 dispatch(logout());
+            } finally {
+                setLoading(false);
             }
         };
 
-        // Only fetch if we don't have a user in state
         if (!user && typeof window !== 'undefined') {
             fetchUserSession();
+        } else {
+            setLoading(false);
         }
     }, [dispatch, user]);
 
-    return { user };
+    return { user, loading };
 };
 
 export default useAuth;

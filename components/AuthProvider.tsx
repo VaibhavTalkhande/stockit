@@ -1,24 +1,26 @@
-'use client';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
-        // This effect will run on mount and when the user state changes
-        if (user === null) {
-            // If we're not on the login or register page, redirect to login
+        if (!loading && user === null) {
             const currentPath = window.location.pathname;
             if (!currentPath.startsWith('/login') && !currentPath.startsWith('/register')) {
                 router.push('/login');
             }
         }
-    }, [user, router]);
+    }, [user, loading, router]);
+
+    if (loading) {
+        // Optionally show a loading spinner here
+        return <div>Loading...</div>;
+    }
 
     return <>{children}</>;
 };
 
-export default AuthProvider; 
+export default AuthProvider;
