@@ -17,7 +17,7 @@ const useAuth = () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    dispatch(setCredentials({ user: data.user }));
+                    dispatch(setCredentials({ user: data.data.user }));
                 } else {
                     dispatch(logout());
                 }
