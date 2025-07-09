@@ -37,11 +37,6 @@ const SideNavbar = () => {
             path: '/dashboard/analytics',
             icon: <FaChartLine className="text-xl" />
         },
-        {
-            name: 'Settings',
-            path: '/dashboard/settings',
-            icon: <FaCog className="text-xl" />
-        }
     ];
     useEffect(() => {
         setIsClient(true);

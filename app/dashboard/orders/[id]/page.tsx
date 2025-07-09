@@ -5,36 +5,36 @@ import { use, useEffect, useState } from "react";
 import store from '../../../../store/index';
 
 interface OrderDetails {
+    paymentStatus: 'pending' | 'paid' | 'failed'; // Extend this union if needed
     _id: string;
     storeName: string;
     customer: {
-        _id: string;
-        name: string;
-        email: string;
+      _id: string;
+      name: string;
+      email: string;
     };
     products: {
-        productId: string;
-        name: string;
-        quantity: number;
-        price: number;
-        _id: string;
+      productId: string
+      name:string;
+      quantity: number;
+      price: number;
+      _id: string;
     }[];
     totalAmount: number;
-    paymentStatus: string;
-    date: Date;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
+    date: string; // ISO string format
+    createdAt: string;
+    updatedAt: string;
 }
 const OrderDetailsPage = () => {
     const params = useParams();
     const { id } = params;
     const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
-    const response = axios.get(`http://localhost:5000/api/sales/${id}`,
+    const response = axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sales/${id}`,
         {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials:true
         }
     );
     useEffect(() => {
@@ -99,9 +99,9 @@ const OrderDetailsPage = () => {
                     </p>
                     <p className="text-sm flex items-center gap-2">
                         Payment Status:
-                        {orderDetails?.paymentStatus === 'Paid' ? (
+                        {orderDetails?.paymentStatus === "paid" ? (
                             <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Paid</span>
-                        ) : orderDetails?.paymentStatus === 'Pending' ? (
+                        ) : orderDetails?.paymentStatus === "pending" ? (
                             <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">Pending</span>
                         ) : (
                             <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">{orderDetails?.paymentStatus || 'Unknown'}</span>
