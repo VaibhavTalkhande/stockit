@@ -147,7 +147,6 @@ const CreateOrderPage = () => {
                     },
                     credentials: 'include',
                     body: JSON.stringify({
-                        storeName: user?.storeName,
                         customer: customer,
                         products: cart,
                         total: calculateTotal()
