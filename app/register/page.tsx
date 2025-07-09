@@ -43,25 +43,69 @@ const RegisterPage = () => {
     };
 
     return (
-        <form onSubmit={handleRegister} className="flex flex-col gap-4 p-4 w-1/2 mx-auto mt-10 bg-white shadow-md rounded-lg">
-            <input type="text" placeholder="Name" value={form.name}
-                   onChange={(e) => setForm({ ...form, name: e.target.value })} />
-            {errors.name && <span className="text-red-500">{errors.name}</span>}
-
-            <input type="email" placeholder="Email" value={form.email}
-                   onChange={(e) => setForm({ ...form, email: e.target.value })} />
-            {errors.email && <span className="text-red-500">{errors.email}</span>}
-
-            <input type="text" placeholder="Store Name" value={form.storeName}
-                   onChange={(e) => setForm({ ...form, storeName: e.target.value })} />
-            {errors.storeName && <span className="text-red-500">{errors.storeName}</span>}
-
-            <input type="password" placeholder="Password" value={form.password}
-                   onChange={(e) => setForm({ ...form, password: e.target.value })} />
-            {errors.password && <span className="text-red-500">{errors.password}</span>}
-
-            <button type="submit">Register</button>
-        </form>
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 py-8 px-2">
+            <form onSubmit={handleRegister} className="mt-24 flex flex-col gap-5 w-full max-w-md bg-white border-4 border-black shadow-xl rounded-2xl p-6 sm:p-10 min-h-[420px] sm:min-h-[480px] justify-center">
+                <h2 className="text-3xl font-extrabold text-center mb-2 bg-blue-500 text-white p-2 rounded border-2 border-black">Register</h2>
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="name" className="font-bold text-black">Name</label>
+                    <input
+                        id="name"
+                        type="text"
+                        placeholder="Name"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        required
+                    />
+                    {errors.name && <span className="text-red-500 text-sm">{errors.name}</span>}
+                </div>
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="email" className="font-bold text-black">Email</label>
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Email"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        required
+                    />
+                    {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+                </div>
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="storeName" className="font-bold text-black">Store Name</label>
+                    <input
+                        id="storeName"
+                        type="text"
+                        placeholder="Store Name"
+                        value={form.storeName}
+                        onChange={(e) => setForm({ ...form, storeName: e.target.value })}
+                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        required
+                    />
+                    {errors.storeName && <span className="text-red-500 text-sm">{errors.storeName}</span>}
+                </div>
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="password" className="font-bold text-black">Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        value={form.password}
+                        onChange={(e) => setForm({ ...form, password: e.target.value })}
+                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        required
+                    />
+                    {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+                </div>
+                <button
+                    type="submit"
+                    className="mt-2 p-3 bg-black text-white font-bold border-2 border-black rounded hover:bg-white hover:text-black transition-all text-lg"
+                >
+                    Register
+                </button>
+            </form>
+        </div>
     );
 };
 
