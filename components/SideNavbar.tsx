@@ -67,7 +67,7 @@ const SideNavbar = () => {
                 })}
             </nav>
 
-            {/* User Profile Section */}
+          
             <div className="absolute bottom-0 left-0 right-0 p-4 border-t-4 border-[#2A2A2A]">
                 <div className="flex items-center gap-3 p-3 rounded-lg border-4 border-[#2A2A2A] bg-[#FFE5D4]">
                     <div className="w-10 h-10 rounded-full bg-[#FF6B6B] border-2 border-[#2A2A2A] flex items-center justify-center font-bold text-[#2A2A2A]">
