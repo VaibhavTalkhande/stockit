@@ -63,7 +63,7 @@ const SideNavbar = () => {
                             </div>
                             <span>{item.name}</span>
                         </Link>
-                    );
+                    ); 
                 })}
             </nav>
 
