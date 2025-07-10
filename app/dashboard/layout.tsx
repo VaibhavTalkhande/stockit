@@ -20,14 +20,11 @@ function DashboardLayout({
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FFE5D4]">
-      <Navbar />
-      <div className="flex pt-16">
-        <SideNavbar />
-        <div className="flex-1 ml-64 p-6">
-          {children}
-        </div>
-      </div>
+    <div className="bg-[#FFE5D4] w-full">
+      <SideNavbar />
+      <main className="z-0 pt-14 md:ml-56 min-h-screen max-w-screen overflow-x-hidden">
+        {children}
+      </main>
     </div>
   );
 }

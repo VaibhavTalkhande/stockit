@@ -28,7 +28,7 @@ const useAuth = () => {
             }
         };
 
-        if (!user && typeof window !== 'undefined') {
+        if (!user) {
             fetchUserSession();
         } else {
             setLoading(false);
