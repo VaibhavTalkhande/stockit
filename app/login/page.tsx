@@ -1,11 +1,14 @@
 'use client';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../../store/slices/authSlice';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import Link from 'next/link';
+import { RootState } from '../../store/index';
 
 const LoginPage = () => {
+    const {user} = useSelector((state: RootState) => state.auth)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -39,7 +42,11 @@ const LoginPage = () => {
             setLoading(false);
         }
     };
-
+    useEffect(() => {
+        if (user) {
+          router.push('/');
+        }
+      }, [user, router]);
     return (
         <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 px-2 py-20 sm:pt-24 md:pt-28 lg:pt-32">
             <form onSubmit={handleLogin} className="flex flex-col gap-6 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white border border-gray-200 shadow-lg rounded-xl p-4 sm:p-8 mx-auto">
@@ -76,7 +83,7 @@ const LoginPage = () => {
                     />
                 </div>
                 <div className="flex justify-end">
-                    <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
+                    <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">Forgot password?</Link>
                 </div>
                 {error && <span className="text-red-500 text-sm text-center">{error}</span>}
                 <button
@@ -88,7 +95,7 @@ const LoginPage = () => {
                 </button>
                 <div className="text-center text-sm text-gray-600 mt-2">
                     Don&apos;t have an account?{' '}
-                    <a href="/register" className="text-blue-600 hover:underline">Register</a>
+                    <Link href="/register" className="text-blue-600 hover:underline">Register</Link>
                 </div>
             </form>
         </div>

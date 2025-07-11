@@ -1,3 +1,4 @@
+"use client"
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials, logout } from "../store/slices/authSlice";
 import { useEffect, useState } from "react";

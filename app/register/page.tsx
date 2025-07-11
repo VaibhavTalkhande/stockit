@@ -3,25 +3,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/slices/authSlice';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const RegisterPage = () => {
     const [form, setForm] = useState({ name: '', email: '', password: '', storeName: '' });
     const dispatch = useDispatch();
-    const [errors, setErrors] = useState({ name: '', email: '', password: '', storeName: '' });
-
+    const router = useRouter();
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        const newErrors = { name: '', email: '', password: '', storeName: '' };
-        if (!form.name) newErrors.name = 'Name is required';
-        if (!form.email) newErrors.email = 'Email is required';
-        if (!form.password) newErrors.password = 'Password is required';
-        if (!form.storeName) newErrors.storeName = 'Store Name is required';
-
-        if (Object.values(newErrors).some((error) => error)) {
-            setErrors(newErrors);
-            return;
-        }
 
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/register`, {
@@ -35,11 +24,12 @@ const RegisterPage = () => {
             if (res.ok) {
                 dispatch(setCredentials(data));
                 toast.success('Registration successful!');
+                setTimeout(()=>router.push('/login'),1500)
             } else {
-                toast.success(data.message || 'Registration failed.');
+                toast.error(data.message || 'Registration failed.');
             }
         } catch (err) {
-            toast.success('Something went wrong!');
+            toast.error('Something went wrong!');
         }
     };
 
@@ -65,7 +55,6 @@ const RegisterPage = () => {
                         className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
-                    {errors.name && <span className="text-red-500 text-sm">{errors.name}</span>}
                 </div>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="email" className="font-medium text-gray-700">Email</label>
@@ -78,7 +67,6 @@ const RegisterPage = () => {
                         className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
-                    {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
                 </div>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="storeName" className="font-medium text-gray-700">Store Name</label>
@@ -91,7 +79,6 @@ const RegisterPage = () => {
                         className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
-                    {errors.storeName && <span className="text-red-500 text-sm">{errors.storeName}</span>}
                 </div>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="password" className="font-medium text-gray-700">Password</label>
@@ -104,7 +91,6 @@ const RegisterPage = () => {
                         className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
-                    {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
                 </div>
                 <button
                     type="submit"
