@@ -24,7 +24,7 @@ Stockit is a modern inventory, sales, and customer management solution for retai
 - **Customer Management:** Add, edit, delete customers, view purchase history and insights.
 - **Sales Management:** Create sales, track products sold, payment status, Stripe integration.
 - **Billing & Email:** Generate and email bills/receipts to customers.
-- **Payment Integration:** Stripe Checkout for online payments.
+- **Payment Integration:** Stripe Checkout webhook for online payments.
 - **AI Business Suggestions:** Uses Gemini API to analyze store data and provide actionable business advice.
 - **Analytics:** Daily sales, top-selling products, and more.
 - **Fast, Responsive UI:** Built with Next.js, React, and Tailwind CSS.
