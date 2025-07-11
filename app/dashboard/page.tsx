@@ -198,19 +198,19 @@ const DashboardPage = () => {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 lg:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2  lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6">
                     {stats.map((stat, index) => (
                         <div
                             key={index}
                             className="bg-white rounded-2xl border-4 border-[#2A2A2A] p-3 sm:p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 group"
                         >
-                            <div className="flex items-center">
+                            <div className="flex items-center flex-wrap">
                                 <div className={`${stat.color} p-2 sm:p-3 md:p-4 rounded-xl text-white mr-2 sm:mr-4 border-2 border-[#2A2A2A] group-hover:scale-110 transition-transform duration-300`}>
                                     {stat.icon}
                                 </div>
                                 <div className="flex-1">
                                     <p className="text-[#2A2A2A] text-xs sm:text-sm font-bold opacity-80">{stat.title}</p>
-                                    <p className="text-lg sm:text-xl md:text-2xl font-black text-[#2A2A2A]">{stat.value}</p>
+                                    <p className="text-lg sm:text-xl md:text-xl font-black text-[#2A2A2A]">{stat.value}</p>
                                 </div>
                             </div>
                         </div>
