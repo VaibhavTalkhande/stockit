@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/slices/authSlice';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -25,13 +26,14 @@ const LoginPage = () => {
             });
             const data = await res.json();
             if (res.ok) {
-                dispatch(setCredentials({ user: data.data.user }));
-                alert('Logged in successfully');
+                dispatch(setCredentials({ user: data.user }));
+                toast.success('Logged in successfully');
                 router.push('/'); // Redirect to home page after successful login
             } else {
                 setError(data.message || 'Login failed.');
             }
         } catch (err) {
+            console.error(err);
             setError('Something went wrong!');
         } finally {
             setLoading(false);
@@ -39,41 +41,55 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 py-8 px-2">
-            <form onSubmit={handleLogin} className="flex flex-col gap-5 w-full max-w-md bg-white border-4 border-black shadow-xl rounded-2xl p-8 sm:p-10 min-h-[420px] sm:min-h-[480px] justify-center">
-                <h2 className="text-3xl font-extrabold text-center mb-2 bg-blue-500 text-white p-2 rounded border-2 border-black">Login</h2>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 px-2 py-20 sm:pt-24 md:pt-28 lg:pt-32">
+            <form onSubmit={handleLogin} className="flex flex-col gap-6 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white border border-gray-200 shadow-lg rounded-xl p-4 sm:p-8 mx-auto">
+                {/* Logo or App Name */}
+                <div className="flex flex-col items-center mb-2">
+                    {/* Replace with your logo if available */}
+                    <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mb-2">
+                        <span className="text-2xl font-bold text-gray-500">S</span>
+                    </div>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Sign in to Stockit</h2>
+                </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="email" className="font-bold text-black">Email</label>
+                    <label htmlFor="email" className="font-medium text-gray-700">Email</label>
                     <input
                         id="email"
                         type="email"
-                        placeholder="Email"
+                        placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="password" className="font-bold text-black">Password</label>
+                    <label htmlFor="password" className="font-medium text-gray-700">Password</label>
                     <input
                         id="password"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
+                </div>
+                <div className="flex justify-end">
+                    <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
                 </div>
                 {error && <span className="text-red-500 text-sm text-center">{error}</span>}
                 <button
                     type="submit"
                     disabled={loading}
-                    className="mt-2 p-3 bg-black text-white font-bold border-2 border-black rounded hover:bg-white hover:text-black transition-all text-lg disabled:opacity-60"
+                    className="w-full mt-2 p-3 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-all text-lg disabled:opacity-60"
                 >
                     {loading ? 'Logging in...' : 'Login'}
                 </button>
+                <div className="text-center text-sm text-gray-600 mt-2">
+                    Don&apos;t have an account?{' '}
+                    <a href="/register" className="text-blue-600 hover:underline">Register</a>
+                </div>
             </form>
         </div>
     );

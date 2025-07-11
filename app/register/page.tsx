@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/slices/authSlice';
+import { toast } from 'react-toastify';
 
 const RegisterPage = () => {
     const [form, setForm] = useState({ name: '', email: '', password: '', storeName: '' });
@@ -33,77 +34,88 @@ const RegisterPage = () => {
 
             if (res.ok) {
                 dispatch(setCredentials(data));
-                alert('Registration successful!');
+                toast.success('Registration successful!');
             } else {
-                alert(data.message || 'Registration failed.');
+                toast.success(data.message || 'Registration failed.');
             }
         } catch (err) {
-            alert('Something went wrong!');
+            toast.success('Something went wrong!');
         }
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 py-8 px-2">
-            <form onSubmit={handleRegister} className="mt-24 flex flex-col gap-5 w-full max-w-md bg-white border-4 border-black shadow-xl rounded-2xl p-6 sm:p-10 min-h-[420px] sm:min-h-[480px] justify-center">
-                <h2 className="text-3xl font-extrabold text-center mb-2 bg-blue-500 text-white p-2 rounded border-2 border-black">Register</h2>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 px-2 py-20 sm:pt-24 md:pt-28 lg:pt-32">
+            <form onSubmit={handleRegister} className="flex flex-col gap-6 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white border border-gray-200 shadow-lg rounded-xl p-4 sm:p-8 mx-auto">
+                {/* Logo or App Name */}
+                <div className="flex flex-col items-center mb-2">
+                    {/* Replace with your logo if available */}
+                    <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mb-2">
+                        <span className="text-2xl font-bold text-gray-500">S</span>
+                    </div>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Create your account</h2>
+                </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="name" className="font-bold text-black">Name</label>
+                    <label htmlFor="name" className="font-medium text-gray-700">Name</label>
                     <input
                         id="name"
                         type="text"
-                        placeholder="Name"
+                        placeholder="Enter your name"
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
                     {errors.name && <span className="text-red-500 text-sm">{errors.name}</span>}
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="email" className="font-bold text-black">Email</label>
+                    <label htmlFor="email" className="font-medium text-gray-700">Email</label>
                     <input
                         id="email"
                         type="email"
-                        placeholder="Email"
+                        placeholder="Enter your email"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
                     {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="storeName" className="font-bold text-black">Store Name</label>
+                    <label htmlFor="storeName" className="font-medium text-gray-700">Store Name</label>
                     <input
                         id="storeName"
                         type="text"
-                        placeholder="Store Name"
+                        placeholder="Enter your store name"
                         value={form.storeName}
                         onChange={(e) => setForm({ ...form, storeName: e.target.value })}
-                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
                     {errors.storeName && <span className="text-red-500 text-sm">{errors.storeName}</span>}
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="password" className="font-bold text-black">Password</label>
+                    <label htmlFor="password" className="font-medium text-gray-700">Password</label>
                     <input
                         id="password"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Enter your password"
                         value={form.password}
                         onChange={(e) => setForm({ ...form, password: e.target.value })}
-                        className="p-3 bg-white border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        className="p-3 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 text-base sm:text-base"
                         required
                     />
                     {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
                 </div>
                 <button
                     type="submit"
-                    className="mt-2 p-3 bg-black text-white font-bold border-2 border-black rounded hover:bg-white hover:text-black transition-all text-lg"
+                    className="w-full mt-2 p-3 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-all text-lg"
                 >
                     Register
                 </button>
+                <div className="text-center text-sm text-gray-600 mt-2">
+                    Already have an account?{' '}
+                    <a href="/login" className="text-blue-600 hover:underline">Login</a>
+                </div>
             </form>
         </div>
     );

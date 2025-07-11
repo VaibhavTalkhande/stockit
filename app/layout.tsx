@@ -5,7 +5,8 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { Providers } from "@/store/providers";
 import AuthProvider from "@/components/AuthProvider";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Providers>
           <AuthProvider>
             <Navbar/>
+            <ToastContainer />
             {children}
           </AuthProvider>
         </Providers>

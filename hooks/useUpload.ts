@@ -20,11 +20,10 @@ export const useUpload = async({image}: {image: File}) => {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
-            withCredentials: false, // Changed to false for Cloudinary
-            timeout: 30000, // 30 seconds timeout
+            withCredentials: false, 
+            timeout: 30000,
         };
 
-        // Ensure the Cloudinary URL is properly formatted
         const cloudinaryUrl = process.env.NEXT_PUBLIC_CLOUDINARY_API_URL;
         if (!cloudinaryUrl) {
             throw new Error('Cloudinary API URL is not configured');
@@ -42,14 +41,10 @@ export const useUpload = async({image}: {image: File}) => {
         console.error('Upload failed:', error);
         if (axios.isAxiosError(error)) {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 throw new Error(`Upload failed: ${error.response.data?.message || error.response.statusText}`);
             } else if (error.request) {
-                // The request was made but no response was received
                 throw new Error('No response received from Cloudinary. Please check your network connection.');
             } else {
-                // Something happened in setting up the request that triggered an Error
                 throw new Error(`Upload failed: ${error.message}`);
             }
         }
