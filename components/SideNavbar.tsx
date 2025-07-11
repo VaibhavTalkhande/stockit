@@ -23,8 +23,8 @@ const SideNavbar = () => {
             icon: <FaHome className="text-xl" />
         },
         {
-            name: 'Products',
-            path: '/dashboard/products',
+            name: 'Inventory',
+            path: '/dashboard/inventory',
             icon: <FaBox className="text-xl" />
         },
         {
