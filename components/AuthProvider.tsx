@@ -11,7 +11,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (!loading && user === null) {
             const currentPath = window.location.pathname;
             if (!currentPath.startsWith('/login') && !currentPath.startsWith('/register') && !currentPath.startsWith('/reset-password')) {
-                router.push('/login');
+                router.push('/');
             }
         }
     }, [user, loading, router]);
