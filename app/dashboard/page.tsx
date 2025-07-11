@@ -90,8 +90,8 @@ const DashboardPage = () => {
     const customersCalculate = ()=>{
         const customerTotals:string[] =[];
         orders.forEach(order=>{
-            if(!customerTotals.includes(order.customer.email)){
-                customerTotals.push(order.customer.email)
+            if(!customerTotals.includes(order.customer.name)){
+                customerTotals.push(order.customer.name)
             }
         })
         return customerTotals.length;

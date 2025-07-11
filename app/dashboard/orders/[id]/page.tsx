@@ -1,46 +1,47 @@
 "use client";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import { use, useEffect, useState } from "react";
-import store from '../../../../store/index';
+import { useEffect, useState } from "react";
 
 interface OrderDetails {
-    paymentStatus: 'pending' | 'paid' | 'failed'; // Extend this union if needed
+    paymentStatus: 'pending' | 'paid' | 'failed';
     _id: string;
-    storeName: string;
+    store: {
+      _id: string;
+      name: string;
+    };
     customer: {
       _id: string;
       name: string;
       email: string;
     };
     products: {
-      productId: string
-      name:string;
+      productId: string;
+      name: string;
       quantity: number;
       price: number;
       _id: string;
     }[];
     totalAmount: number;
-    date: string; // ISO string format
+    date: string;
     createdAt: string;
     updatedAt: string;
 }
+
 const OrderDetailsPage = () => {
     const params = useParams();
     const { id } = params;
     const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
-    const response = axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sales/${id}`,
-        {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            withCredentials:true
-        }
-    );
+
     useEffect(() => {
         const fetchOrderDetails = async () => {
             try {
-                const res = await response;
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/sales/${id}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    withCredentials: true
+                });
                 if (res.status === 200) {
                     console.log("Order Details:", res.data);
                     setOrderDetails(res.data);
@@ -53,6 +54,7 @@ const OrderDetailsPage = () => {
         };
         fetchOrderDetails();
     }, [id]);
+
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-blue-100 text-black py-8 px-2">
             <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl">
@@ -64,8 +66,12 @@ const OrderDetailsPage = () => {
                 <div className="mb-6">
                     <h2 className="text-xl font-bold mb-2 text-gray-800">Order Items</h2>
                     <div className="mb-2 flex flex-col gap-1">
-                        <p className="text-base font-medium">Store: <span className="text-blue-600">{orderDetails?.storeName}</span></p>
-                        <p className="text-base font-medium">Customer: <span className="text-blue-600">{orderDetails?.customer?.name}</span></p>
+                        <p className="text-base font-medium">
+                            Store: <span className="text-blue-600">{orderDetails?.store?.name || "N/A"}</span>
+                        </p>
+                        <p className="text-base font-medium">
+                            Customer: <span className="text-blue-600">{orderDetails?.customer?.name}</span>
+                        </p>
                     </div>
                     <table className="w-full border-collapse rounded-lg overflow-hidden shadow-sm">
                         <thead>

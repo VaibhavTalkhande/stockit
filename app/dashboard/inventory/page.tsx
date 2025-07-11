@@ -108,84 +108,76 @@ const InventoryPage = () => {
     }
 
     return (
-        <div className="p-6 bg-white text-black">
-            <div className="mb-8">
-                <h1 className="text-3xl font-bold mb-6">Inventory</h1>
-                
-                <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 rounded-lg mb-6">
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <div className="flex-1">
-                            <input
-                                type="text"
-                                placeholder="Search products..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full px-4 py-2 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                            />
-                        </div>
-                        
-                        <div className="flex gap-4">
-                            <select
-                                value={selectedCategory}
-                                onChange={(e) => setSelectedCategory(e.target.value)}
-                                className="px-4 py-2 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                            >
-                                <option value="">All Categories</option>
-                                {categories.map(category => (
-                                    <option key={category} value={category}>
-                                        {category.charAt(0).toUpperCase() + category.slice(1)}
-                                    </option>
-                                ))}
-                            </select>
-
-                            <select
-                                value={sortBy}
-                                onChange={(e) => setSortBy(e.target.value)}
-                                className="px-4 py-2 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                            >
-                                <option value="name">Sort by Name</option>
-                                <option value="price">Sort by Price</option>
-                                <option value="stock">Sort by Stock</option>
-                            </select>
-
-                            <button
-                                onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
-                                className="px-4 py-2 bg-black text-white border-2 border-black rounded-lg font-bold hover:bg-white hover:text-black transition-all"
-                            >
-                                {sortOrder === 'asc' ? '↑' : '↓'}
-                            </button>
-                        </div>
+        <div className="min-h-screen p-4 sm:p-6">
+            <div className="max-w-6xl mx-auto">
+                <h1 className="text-3xl font-bold mb-6 text-gray-800">Inventory</h1>
+                <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 mb-6">
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                        <input
+                            type="text"
+                            placeholder="Search products..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 bg-gray-50"
+                        />
+                        <select
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 bg-gray-50"
+                        >
+                            <option value="">All Categories</option>
+                            {categories.map(category => (
+                                <option key={category} value={category}>
+                                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                                </option>
+                            ))}
+                        </select>
+                        <select
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value)}
+                            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 bg-gray-50"
+                        >
+                            <option value="name">Sort by Name</option>
+                            <option value="price">Sort by Price</option>
+                            <option value="stock">Sort by Stock</option>
+                        </select>
+                        <button
+                            onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all"
+                        >
+                            {sortOrder === 'asc' ? '↑' : '↓'}
+                        </button>
                     </div>
                 </div>
+
+                {error && (
+                    <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-4">
+                        {error}
+                    </div>
+                )}
+
+                {isLoading ? (
+                    <div className="flex justify-center items-center h-64">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                        {filteredProducts.map(product => (
+                            <ProductCard
+                                key={product._id}
+                                product={product}
+                                onUpdate={handleUpdate}
+                            />
+                        ))}
+                    </div>
+                )}
+
+                {!isLoading && filteredProducts.length === 0 && (
+                    <div className="text-center py-8">
+                        <p className="text-xl font-bold text-gray-600">No products found</p>
+                    </div>
+                )}
             </div>
-
-            {error && (
-                <div className="bg-red-200 border-2 border-black text-black px-4 py-3 rounded-lg mb-4">
-                    {error}
-                </div>
-            )}
-
-            {isLoading ? (
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
-                </div>
-            ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {filteredProducts.map(product => (
-                        <ProductCard
-                            key={product._id}
-                            product={product}
-                            onUpdate={handleUpdate}
-                        />
-                    ))}
-                </div>
-            )}
-
-            {!isLoading && filteredProducts.length === 0 && (
-                <div className="text-center py-8">
-                    <p className="text-xl font-bold">No products found</p>
-                </div>
-            )}
         </div>
     );
 };
