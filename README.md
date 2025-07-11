@@ -1,32 +1,44 @@
 # Stockit
 
-Stockit is your go-to stock management solution, designed to help you efficiently track products, sales, and customers. Built with [Next.js](https://nextjs.org), Stockit provides a modern, responsive dashboard for managing your inventory and business operations.
+> _This is the client-side (Next.js) app for Stockit. The content and features are closely aligned with the [Stockit Backend](https://github.com/VaibhavTalkhande/stockit-backend), which provides the REST API and business logic. We also offer a desktop version built with ElectronJS. For full backend features, API endpoints, and business logic, see the backend README._
+
+Stockit is a modern inventory, sales, and customer management solution for retail stores. The frontend is built with [Next.js](https://nextjs.org) and communicates with a Node.js/Express/MongoDB backend. Stockit provides a responsive dashboard for managing your business, with authentication, analytics, and AI-powered business suggestions (via Gemini AI).
+
+> **Backend is deployed on Render.**
 
 ## Related Projects
 
 - **Frontend Nextjs GitHub:** [https://github.com/VaibhavTalkhande/stockit](https://github.com/VaibhavTalkhande/stockit)
 - **Frontend Deployed App Link:** [https://stockit-wine.vercel.app](https://stockit-wine.vercel.app)
 - **ElectronJS Desktop App:** [https://github.com/VaibhavTalkhande/stockit-desktop](https://github.com/VaibhavTalkhande/stockit-desktop)
-
 - **Backend GitHub:** [https://github.com/VaibhavTalkhande/stockit-backend](https://github.com/VaibhavTalkhande/stockit-backend)
 
 ---
+
 ## Features
 
-- 📦 Product management: Add, edit, and track your products.
-- 🛒 Sales tracking: View and manage sales orders.
-- 👥 Customer insights: Monitor your customer base and activity.
-- 📊 Dashboard: Get real-time statistics on revenue, orders, customers, and inventory.
-- 🔒 Authentication: Secure login and user management.
-- ⚡ Fast and responsive UI.
+- **User Authentication:** Register, login, logout, JWT-based session management.
+- **Password Management:** Forgot/reset password with secure email token flow.
+- **Store Management:** Each user is associated with a store.
+- **Product Management:** Add, edit, delete, and track products and stock.
+- **Customer Management:** Add, edit, delete customers, view purchase history and insights.
+- **Sales Management:** Create sales, track products sold, payment status, Stripe integration.
+- **Billing & Email:** Generate and email bills/receipts to customers.
+- **Payment Integration:** Stripe Checkout for online payments, payment link resending.
+- **AI Business Suggestions:** Uses Gemini API to analyze store data and provide actionable business advice.
+- **Role-based Access:** Auth middleware protects sensitive routes.
+- **Analytics:** Daily sales, top-selling products, and more.
+- **Fast, Responsive UI:** Built with Next.js, React, and Tailwind CSS.
+
+---
 
 ## Getting Started
 
-To run Stockit locally, follow these steps:
+To run the Stockit frontend locally:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/stockit.git
+   git clone https://github.com/VaibhavTalkhande/stockit.git
    cd stockit
    ```
 
@@ -39,11 +51,11 @@ To run Stockit locally, follow these steps:
 
 3. **Set up environment variables:**
 
-   Create a `.env.local` file in the root directory and add the following (replace with your actual backend URL):
-
+   Create a `.env.local` file in the root directory and add:
    ```
-   NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
+   NEXT_PUBLIC_BACKEND_URL=https://your-backend-url.onrender.com
    ```
+   (Replace with your actual backend URL.)
 
 4. **Run the development server:**
    ```bash
@@ -60,12 +72,16 @@ To run Stockit locally, follow these steps:
 
    Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
+---
+
 ## Project Structure
 
 - `app/` - Main Next.js app directory (pages, layouts, etc.)
 - `components/` - Reusable React components (e.g., Navbar, AuthProvider)
 - `store/` - State management and providers
 - `public/` - Static assets
+
+---
 
 ## Technologies Used
 
@@ -75,9 +91,11 @@ To run Stockit locally, follow these steps:
 - [Tailwind CSS](https://tailwindcss.com/)
 - [react-toastify](https://fkhadra.github.io/react-toastify/)
 
+---
+
 ## Deployment
 
-Stockit can be easily deployed on [Vercel](https://vercel.com/) or any platform that supports Next.js.
+Stockit frontend can be easily deployed on [Vercel](https://vercel.com/) or any platform that supports Next.js.
 
 1. Push your code to a GitHub repository.
 2. Import your project into Vercel.
@@ -86,14 +104,18 @@ Stockit can be easily deployed on [Vercel](https://vercel.com/) or any platform 
 
 For more details, see the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
 
+---
+
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
+Pull requests and issues are welcome! Please open an issue to discuss your ideas or report bugs.
 
 ---
 
-Made with ❤️ using Next.js.
+## License
+
+MIT
+
+---
+
+_Made with ❤️ using Next.js. See also the [Stockit Backend](https://github.com/VaibhavTalkhande/stockit-backend) and [ElectronJS Desktop App](https://github.com/VaibhavTalkhande/stockit-desktop)._
