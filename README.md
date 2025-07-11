@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stockit
+
+Stockit is your go-to stock management solution, designed to help you efficiently track products, sales, and customers. Built with [Next.js](https://nextjs.org), Stockit provides a modern, responsive dashboard for managing your inventory and business operations.
+
+## Related Projects
+
+- **Frontend Nextjs GitHub:** [https://github.com/VaibhavTalkhande/stockit](https://github.com/VaibhavTalkhande/stockit)
+- **Frontend Deployed App Link:** [https://stockit-wine.vercel.app](https://stockit-wine.vercel.app)
+- **ElectronJS Desktop App:** [https://github.com/VaibhavTalkhande/stockit-desktop](https://github.com/VaibhavTalkhande/stockit-desktop)
+
+- **Backend GitHub:** [https://github.com/VaibhavTalkhande/stockit-backend](https://github.com/VaibhavTalkhande/stockit-backend)
+
+---
+## Features
+
+- 📦 Product management: Add, edit, and track your products.
+- 🛒 Sales tracking: View and manage sales orders.
+- 👥 Customer insights: Monitor your customer base and activity.
+- 📊 Dashboard: Get real-time statistics on revenue, orders, customers, and inventory.
+- 🔒 Authentication: Secure login and user management.
+- ⚡ Fast and responsive UI.
 
 ## Getting Started
 
-First, run the development server:
+To run Stockit locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/stockit.git
+   cd stockit
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Set up environment variables:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   Create a `.env.local` file in the root directory and add the following (replace with your actual backend URL):
 
-## Learn More
+   ```
+   NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Open the app:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/` - Main Next.js app directory (pages, layouts, etc.)
+- `components/` - Reusable React components (e.g., Navbar, AuthProvider)
+- `store/` - State management and providers
+- `public/` - Static assets
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologies Used
+
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [react-toastify](https://fkhadra.github.io/react-toastify/)
+
+## Deployment
+
+Stockit can be easily deployed on [Vercel](https://vercel.com/) or any platform that supports Next.js.
+
+1. Push your code to a GitHub repository.
+2. Import your project into Vercel.
+3. Set the required environment variables in the Vercel dashboard.
+4. Deploy!
+
+For more details, see the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Made with ❤️ using Next.js.
