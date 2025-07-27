@@ -1,6 +1,6 @@
 # Stockit
 
-> _This is the client-side (Next.js) app for Stockit. The content and features are closely aligned with the [Stockit Backend](https://github.com/VaibhavTalkhande/stockit-backend), which provides the REST API and business logic. We also offer a desktop version built with ElectronJS. For full backend features, API endpoints, and business logic, see the backend README._
+> _This is the client-side (Next.js) app for Stockit. The content and features are closely aligned with the [Stockit Backend](https://github.com/VaibhavTalkhande/stockit-backend), which provides the REST API and business logic. It also have a desktop version built with ElectronJS. For full backend features, API endpoints, and business logic, see the backend README._
 
 Stockit is a modern inventory, sales, and customer management solution for retail stores. The frontend is built with [Next.js](https://nextjs.org) and communicates with a Node.js/Express/MongoDB backend. Stockit provides a responsive dashboard for managing your business, with authentication, analytics, and AI-powered business suggestions (via Gemini AI).
 
@@ -24,9 +24,8 @@ Stockit is a modern inventory, sales, and customer management solution for retai
 - **Customer Management:** Add, edit, delete customers, view purchase history and insights.
 - **Sales Management:** Create sales, track products sold, payment status, Stripe integration.
 - **Billing & Email:** Generate and email bills/receipts to customers.
-- **Payment Integration:** Stripe Checkout for online payments, payment link resending.
+- **Payment Integration:** Stripe Checkout webhook for online payments.
 - **AI Business Suggestions:** Uses Gemini API to analyze store data and provide actionable business advice.
-- **Role-based Access:** Auth middleware protects sensitive routes.
 - **Analytics:** Daily sales, top-selling products, and more.
 - **Fast, Responsive UI:** Built with Next.js, React, and Tailwind CSS.
 
