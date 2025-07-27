@@ -10,7 +10,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         if (!loading && user === null) {
             const currentPath = window.location.pathname;
-            if (!currentPath.startsWith('/login') && !currentPath.startsWith('/register') && !currentPath.startsWith('/reset-password')) {
+            if (!currentPath.startsWith('/login') && !currentPath.startsWith('/register') && !currentPath.startsWith('/reset-password') && !currentPath.startsWith('/success') && !currentPath.startsWith('/thank-you')) {
                 router.push('/');
             }
         }
