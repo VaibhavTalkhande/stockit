@@ -63,10 +63,6 @@ const page = () => {
             setSales([]);
           }
         };
-        fetchData();
-    }, []);
-
-    useEffect(() => {
       const fetchSuggestion = async () => {
         setAiLoading(true);
         setAiError("");
@@ -85,6 +81,7 @@ const page = () => {
           setAiLoading(false);
         }
       };
+      fetchData();
       fetchSuggestion();
     }, []);
 
